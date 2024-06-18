@@ -111,6 +111,7 @@
     /* Skip type checking all .d.ts files. */
     "lib": [
       "es6",
+      "es2017",
       "dom",
       "dom.iterable",
       "scripthost"
