@@ -1,8 +1,7 @@
 //webpack.config.js
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin    = require("html-webpack-plugin");
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     entry: [
@@ -32,7 +31,20 @@ module.exports = {
                     "css-loader",
                     "sass-loader",
                 ],
-            }
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg|webp|xml|piskel|mp3)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[contenthash].[ext]', // Output file name
+                            outputPath: 'assets', // Output directory for images
+                            publicPath: 'assets', // Public path for images
+                        },
+                    },
+                ],
+            },
         ]
     },
     plugins: [
@@ -46,10 +58,5 @@ module.exports = {
             title: 'Making your first Phaser 3 game',
             favicon: 'src/static/favicon.ico',
         }),
-        new CopyWebpackPlugin({
-            patterns: [
-                { from: 'src/static' }
-            ]
-        })
     ],
 };
